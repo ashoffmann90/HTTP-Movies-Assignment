@@ -10,7 +10,7 @@ const initialMovie = {
     stars: []
 }
 
-export const UpdateMovie = () => {
+export const UpdateMovie = (props) => {
     const { push } = useHistory();
     const [movie, setMovie] = useState(initialMovie);
     const { id } = useParams();
@@ -40,7 +40,7 @@ export const UpdateMovie = () => {
         axios.put(`http://localhost:5000/api/movies/${id}`, movie)
         .then(res => {
             console.log(res.data)
-            setMovie(res.data)
+            props.getMovieList()
             push('/')        
         })
         .catch(err => {
